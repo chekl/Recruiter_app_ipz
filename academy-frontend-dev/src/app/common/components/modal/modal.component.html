@@ -1,0 +1,11 @@
+<div class="modal" [ngClass]="'modal__' + size">
+  <div class="modal__header">
+    <h2 class="modal__header-title">{{title}}</h2>
+    <button mat-dialog-close class="close-button" type="button">
+      <img class="icon-close" src="assets/images/close.png" />
+    </button>
+  </div>
+  <div class="modal__body">
+    <ng-content></ng-content>
+  </div>
+</div>

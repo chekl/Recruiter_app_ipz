@@ -1,0 +1,25 @@
+// Colors
+$pine-green: #007672;
+$pine-green-translucent: rgba($pine-green, 0.1);
+$light-pine-green: #00b2a9;
+$pink: #e0004d;
+$blue: #4a90e2;
+$orange: #f5a623;
+$black: #101820;
+$white: #fff;
+$purple: #65087e;
+
+// TODO: reduce number of greys
+$dark-grey: #373a36;
+$grey: #ccc;
+$light-grey: #f2f2f2;
+$light-gray: #fafafa;
+$silver-gray: #ddd;
+$translucent-gray: #eeeeee;
+$revel: rgba(238, 238, 238, 0.75);
+$gray: #aaaaaa;
+
+// Box-shadow
+$box-shadow:
+  0px 4px 25px rgba(0, 184, 178, 0.05),
+  0px 4px 25px rgba(0, 0, 0, 0.05);

@@ -1,0 +1,46 @@
+<div class="info-card">
+  <div class="info-card__body">
+    <div class="info-card__left-block">
+      <div class="info-card__title">{{ titleText }}</div>
+      <div class="info-card__content" *ngIf="isSpan">
+        {{ spanCompletedValue
+        }}<span class="info-card__content-span">out of {{ spanMaximumValue }}</span>
+      </div>
+      <div class="info-card__content" *ngIf="contentText">{{ contentText }}<span *ngIf="isPercent" class="info-card__content_percent">%</span>  </div>
+    </div>
+    <div class="info-card__button-block" *ngIf="buttonText">
+      <ng-container *ngIf="isFlatButton; else strokedButton">
+        <button
+          mat-flat-button
+          color="primary"
+          class="info-card__button info-card__button-flat"
+          [disabled]="isButtonDisabled"
+          (click)="onButtonClick()">
+
+          <ng-container *ngIf="isLoading; else invite">
+            <ta-loader [diameter]="30" color="White"></ta-loader>
+          </ng-container>
+          <ng-template #invite>
+            {{ buttonText }}
+          </ng-template>
+        </button>
+      </ng-container>
+      <ng-template #strokedButton>
+        <button
+          mat-stroked-button
+          color="primary"
+          class="info-card__button info-card__button-stroked"
+          [disabled]="isButtonDisabled"
+          (click)="onButtonClick()"
+        >
+          <ng-container *ngIf="isLoading; else invite">
+            <ta-loader [diameter]="30"></ta-loader>
+          </ng-container>
+          <ng-template #invite>
+            {{ buttonText }}
+          </ng-template>
+        </button>
+      </ng-template>
+    </div>
+  </div>
+</div>

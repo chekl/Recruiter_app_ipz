@@ -1,0 +1,34 @@
+.header {
+  display: flex;
+  align-items: flex-start;
+  margin-bottom: 21px;
+  & > *:not(:last-child) {
+    margin-right: 2px;
+  }
+  img {
+    cursor: pointer;
+  }
+  &__title-block {
+    display: flex;
+    flex-direction: column;
+  }
+  &__subtitle {
+    margin-top: 11px;
+    color: #007672;
+    font-family: 'Open Sans', sans-serif;
+    font-size: 13px;
+    font-weight: 400;
+    line-height: normal;
+  }
+}
+.main-block {
+  display: flex;
+  column-gap: 10px;
+  & > * {
+    flex: 0 1 50%;
+  }
+}
+
+.mat-headline-5 {
+  margin: 0;
+}

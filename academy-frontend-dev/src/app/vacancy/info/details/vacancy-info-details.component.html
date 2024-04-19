@@ -1,0 +1,30 @@
+<div class="vacancy-info-details" *ngIf="vacancy">
+  <div class="top-block">
+    <div class="top-block__title">
+      <img src="assets/icons/previous-arr.svg" alt="previous" (click)="navigateBack()" />
+      <ta-vacancy-title [vacancyType]="vacancy.type.name" [vacancyTitle]="vacancy.title"></ta-vacancy-title>
+    </div>
+    <div class="top-block__buttons">
+      <button class="top-block__button" [disabled]="!vacancy.link" (click)="openLink()"
+        [matTooltip]="!vacancy.link ? 'Link is not provided' : ''" matTooltipClass="tooltip tooltip__below">
+        <mat-icon>launch</mat-icon>
+      </button>
+      <button class="top-block__button" routerLink="/vacancy/edit/{{ vacancy._id }}">
+        <mat-icon>edit</mat-icon>
+      </button>
+      <button class="top-block__button" (click)="confirmDeleteModal()" [disabled]="vacancy.status !== 'Closed' || isRemoveButtonDisabled"
+        [matTooltip]="canBeDeleted(vacancy.status) ? 'Only closed vacancies can be deleted' : ''"
+        matTooltipClass="tooltip tooltip__below" matTooltipPosition="below">
+        <mat-icon>delete</mat-icon>
+      </button>
+    </div>
+  </div>
+  <div class="main-block">
+    <ta-info-card [titleText]="'Status'" [buttonText]="vacancy.status === 'Active' ? 'Close' : 'Re-open'"
+      [contentText]="vacancy.status" [isFlatButton]="false" (buttonClicked)="openModalCloseVacancy()" [isLoading]="isVacancyStatusChanging" [isButtonDisabled]="isVacancyStatusChanging"></ta-info-card>
+    <ta-info-card [titleText]="'Completed'" [isSpan]="true" [spanCompletedValue]="completed"
+      [spanMaximumValue]="vacancy.applications.length"></ta-info-card>
+    <ta-info-card [titleText]="'Opened'"
+      [contentText]="(vacancy.opened | date: 'dd MMM. yyyy') ?? 'Invalid Time'"></ta-info-card>
+  </div>
+</div>

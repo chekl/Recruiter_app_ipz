@@ -1,0 +1,93 @@
+@use '@angular/material' as mat;
+
+@import 'src/styles/variables.scss';
+@import 'src/styles/typography.scss';
+
+.modal-note {
+  margin-bottom: 15px;
+}
+
+.modal-form {
+  flex: 0 1 auto;
+  &__label {
+    display: block;
+    padding: 5px 9px;
+  }
+  &__input {
+    padding: 7px 9px;
+    border: 2px $silver-gray solid;
+    border-radius: 2px;
+    width: 100%;
+  }
+
+  &__input:focus {
+    outline: none;
+  }
+
+  &__field {
+    margin: 0px 0px 15px 0px;
+  }
+  &__notes {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  &__error-msg {
+    color: $pink;
+    font-size: 10px;
+    font-family: $raleway-font-family;
+    font-weight: 600;
+    display: block;
+  }
+}
+
+.option-icon {
+  width: 32px;
+  height: 32px;
+}
+.option-value {
+  color: $black;
+  font-size: 14px;
+  font-family: $opensans-font-family;
+  padding: 8px 0px 9px 0px;
+}
+
+.mat-mdc-unelevated-button.mat-mdc-button-base {
+  height: 40px;
+}
+
+.btn-invite {
+  width: 90px;
+  float: right;
+  margin: 25px 0px 0px 0px;
+}
+
+.autofilled {
+  background-color: $translucent-gray;
+}
+
+::ng-deep body .mdc-menu-surface {
+  &.mat-mdc-autocomplete-panel {
+    border: none;
+    border-radius: 0px;
+
+    &.mat-mdc-autocomplete-panel,
+    &.mat-mdc-select-panel {
+      padding: 0;
+    }
+  }
+
+  .mat-mdc-option {
+    padding: 0px;
+    border: 2px solid $silver-gray;
+  }
+}
+
+::ng-deep .mdc-list-item__primary-text {
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+::ng-deep body .mat-pseudo-checkbox {
+  display: none;
+}

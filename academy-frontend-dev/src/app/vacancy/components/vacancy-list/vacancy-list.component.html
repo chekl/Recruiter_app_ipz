@@ -1,0 +1,102 @@
+<div class="vacancy-list__wrapper">
+  <div class="vacancy-header">
+    <button mat-flat-button color="primary" routerLink="/vacancy/create">Add new</button>
+    <div class="vacancy-header__review">
+      <div class="vacancy-header__review-wrapper">
+        <div class="review-text">Applications need review</div>
+        <ng-container *ngIf="loadingService.loadingApplications; else counter">
+          <ta-loader [diameter]="35"></ta-loader>
+        </ng-container>
+        <ng-template #counter
+          ><span class="review-counter">{{ needReviewCounter }}</span></ng-template
+        >
+      </div>
+
+      <button mat-stroked-button class="vacancy-header__review__button" color="primary" routerLink="/vacancy/review" [disabled]="loadingService.loadingApplications">Review</button>
+    </div>
+  </div>
+  <div
+    class="scroll"
+    infinite-scroll
+    [infiniteScrollThrottle]="50"
+    [infiniteScrollDistance]="scrollDistance"
+    (scrolled)="onScroll()"
+    [scrollWindow]="false">
+    
+      <table mat-table [dataSource]="vacancies" class="mat-table scroll">
+        <ng-container matColumnDef="vacancy">
+          <th mat-header-cell *matHeaderCellDef class="vacancy-cell-width header-cell">Vacancy</th>
+          <td mat-cell *matCellDef="let element" class="vacancy-cell-width">{{ element.title }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="type">
+          <th mat-header-cell *matHeaderCellDef class="header-cell cell-width">Type</th>
+          <td mat-cell *matCellDef="let element" class="column-width">{{ element.type.name }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="status">
+          <th mat-header-cell *matHeaderCellDef class="header-cell cell-width">
+            Status
+            <img
+              *ngIf="vacancies.length > 1"
+              src="{{
+                statusSort === 'asc'
+                  ? 'assets/icons/sort-up-arr.svg'
+                  : 'assets/icons/arrow-list.svg'
+              }}"
+              alt="arrow"
+              class="icon absolute-position"
+              (click)="sortByStatus()" />
+          </th>
+          <td mat-cell *matCellDef="let element" class="column-width">
+            <img
+              src="{{
+                element.status === 'Active' ? 'assets/icons/active.svg' : 'assets/icons/closed.svg'
+              }}"
+              alt="status" />
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="opened">
+          <th mat-header-cell *matHeaderCellDef class="header-cell cell-width">
+            Opened
+            <img
+              *ngIf="vacancies.length > 1"
+              src="{{
+                openedSort === 'asc'
+                  ? 'assets/icons/sort-up-arr.svg'
+                  : 'assets/icons/arrow-list.svg'
+              }}"
+              alt="arrow"
+              class="icon absolute-position"
+              (click)="sortByOpened()" />
+          </th>
+          <td mat-cell *matCellDef="let element" class="column-width">
+            {{ element.opened | date: 'dd MMM yyyy' }}
+            <img
+              src="assets/icons/left-arrow.svg"
+              class="arrow-left"
+              alt="arrow"
+              (click)="navigateToProduct(element._id)" />
+          </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns" class="mat-mdc-header-row"></tr>
+        <tr
+          mat-row
+          *matRowDef="let element; columns: displayedColumns"
+          (click)="navigateToProduct(element._id)"></tr>
+
+        <tr class="mat-row" *matNoDataRow>
+          <td class="mat-mdc-cell no-data" colspan="4">
+            <ng-container *ngIf="loadingService.loadingVacancies; else noVacancies">
+              <ta-loader></ta-loader>
+            </ng-container>
+            <ng-template #noVacancies>
+              <p *ngIf="vacancies.length === 0" class="empty">No vacancies yet</p>
+            </ng-template>
+          </td>
+        </tr>
+      </table>
+  </div>
+</div>

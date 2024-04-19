@@ -1,0 +1,240 @@
+@import 'src/styles/variables.scss';
+@import 'src/styles/mixins.scss';
+
+body {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  // Modal
+  .mat-mdc-dialog-container .mdc-dialog {
+    &__content {
+      color: $black;
+      max-height: max-content;
+      height: max-content;
+      overflow: hidden;
+      padding: 20px 40px 0;
+      overflow-y: auto;
+      flex: 1;
+    }
+
+    &__actions {
+      justify-content: flex-end;
+      gap: 12px;
+    }
+  }
+
+  .mat-mdc-dialog-actions .mat-mdc-button-base + .mat-mdc-button-base {
+    margin: 0;
+  }
+
+  // Button
+  .mdc-button {
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: $white;
+    border-radius: 2px;
+    padding: 10px 20px;
+
+    &:has(> .mat-icon) {
+      min-width: 40px;
+      min-height: 40px;
+      padding: 0;
+    }
+  }
+
+  .mat-mdc-outlined-button {
+    &.mat-primary {
+      border: 2px solid $pine-green;
+    }
+  }
+
+  .mdc-button:disabled {
+    opacity: 0.5;
+    color: $white;
+  }
+
+  .mat-mdc-unelevated-button[disabled] {
+    background: $pine-green;
+  }
+
+  .mat-mdc-icon-button.mat-mdc-button-base,
+  .mat-mdc-icon-button .mat-mdc-button-touch-target {
+    width: 40px;
+    height: 40px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  // Icon
+  .mdc-button > .mat-icon {
+    margin: 0;
+  }
+
+  .mat-icon,
+  .mat-mdc-icon-button svg {
+    font-size: 18px;
+    width: 18px;
+    height: 18px;
+    line-height: 18px;
+  }
+
+  .mat-mdc-icon-button .mat-mdc-button-touch-target {
+    height: 32px;
+    width: 32px;
+  }
+
+  // Table
+  .mat-mdc-table {
+    .mat-mdc-header-row {
+      position: sticky;
+      top: 0;
+    }
+
+    .mat-mdc-row,
+    .mat-mdc-header-row,
+    .mat-mdc-no-data-row {
+      height: 48px;
+    }
+
+    .mat-mdc-row:hover {
+      .mat-mdc-cell {
+        @include hover-transition;
+        cursor: pointer;
+        background: $pine-green-translucent;
+      }
+    }
+
+    .mat-mdc-no-data-row {
+      text-transform: uppercase;
+      color: $pine-green;
+
+      .mat-mdc-cell {
+        text-align: center;
+        vertical-align: middle;
+      }
+    }
+
+    .mat-mdc-header-cell,
+    .mat-mdc-cell {
+      position: relative;
+      padding: 0;
+
+      &:first-child {
+        padding-inline: 10px;
+      }
+    }
+
+    .mat-mdc-checkbox {
+      @include hover-transition;
+    }
+  }
+
+  // Paginator
+  .mat-mdc-paginator {
+    &,
+    & .mat-mdc-select-value {
+      @extend .mat-body-2;
+    }
+
+    &-container {
+      min-height: 60px;
+    }
+  }
+
+  .mdc-notched-outline__leading,
+  .mdc-notched-outline__trailing {
+    border: 2px solid $grey;
+  }
+
+  .mdc-notched-outline__leading {
+    border-right: none;
+  }
+
+  .mdc-notched-outline__trailing {
+    border-left: none;
+  }
+
+  // Card
+  .mat-mdc-card {
+    box-shadow: $box-shadow;
+  }
+
+  // Snackbar
+  .mat-mdc-snack-bar-container {
+    text-align: center;
+
+    .mat-mdc-snack-bar-label {
+      @extend .mat-subtitle-2;
+      font-weight: 600;
+    }
+
+    &.snackbar--error .mdc-snackbar__surface {
+      background-color: $pink;
+    }
+
+    &.snackbar--success .mdc-snackbar__surface {
+      background-color: $light-pine-green;
+    }
+  }
+
+  // Autocomplete
+  .mdc-menu-surface {
+    &.mat-mdc-autocomplete-panel {
+      box-shadow: none;
+      border: 2px solid $silver-gray;
+      border-radius: 2px;
+
+      &.mat-mdc-autocomplete-panel,
+      &.mat-mdc-select-panel {
+        padding: 0;
+      }
+    }
+
+    .mat-mdc-option {
+      min-height: fit-content;
+      border-radius: 2px;
+      padding: 8px 9px 9px;
+      outline: none;
+      resize: none;
+    }
+  }
+
+  // Radio button
+  .mat-mdc-radio-button {
+    opacity: 0.1;
+
+    .mdc-radio {
+      height: 3px;
+      width: 36px;
+      padding: 0;
+      background-color: $pine-green;
+
+      &__native-control {
+        visibility: hidden;
+      }
+
+      &__background {
+        visibility: hidden;
+      }
+    }
+
+    .mat-mdc-radio-touch-target {
+      visibility: hidden;
+    }
+  }
+
+  // Logout menu
+
+  .mat-mdc-menu-content {
+    padding: 0;
+
+    .mat-mdc-menu-item {
+      min-height: 64px;
+
+      .mdc-list-item__primary-text {
+        @extend .mat-subtitle-2;
+        font-weight: 600;
+      }
+    }
+  }
+}

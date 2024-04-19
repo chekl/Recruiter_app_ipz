@@ -1,0 +1,200 @@
+<ng-container *ngIf="loadingService.loadingVacancies; else VacanciesCreateEdit">
+  <ta-loader [diameter]="100"></ta-loader>
+</ng-container>
+<ng-template #VacanciesCreateEdit>
+  <div class="vacancy">
+    <div class="vacancy__header">
+      <h1>{{ isEditMode ? 'Edit' : 'Create' }} vacancy</h1>
+      <span  
+        [matTooltip]="vacancyForm.valid && taskCounter === 0 ? 'Add at least one question' : ''"
+        matTooltipClass="tooltip tooltip__left"
+        matTooltipPosition="left"> 
+        <button
+          mat-flat-button
+          class="vacancy__button"
+          color="primary"
+          (click)="isEditMode ? editVacancy() : createVacancy()"
+          [disabled]="!vacancyForm.valid || taskCounter === 0 || loadingService.updatingVacancies">
+          <ng-container *ngIf="loadingService.updatingVacancies; else SaveCreate">
+            <ta-loader [diameter]="25" color="White"></ta-loader>
+          </ng-container>
+          <ng-template #SaveCreate>
+            {{ isEditMode ? 'Save' : 'Create' }}
+          </ng-template>
+        </button>
+      </span>
+    </div>
+    <div class="vacancy__content">
+      <div class="vacancy__form">
+        <form class="form" [formGroup]="vacancyForm">
+          <div class="form__field">
+            <div class="form__label-wrapper">
+              <label for="title" class="form__label">Title</label>
+              <span
+                *ngIf="title?.errors?.['required'] && title?.touched"
+                class="form__error-message">
+                Field can't be empty
+              </span>
+            </div>
+            <input
+              id="title"
+              type="text"
+              class="form__input"
+              placeholder="Type vacancy name"
+              formControlName="title"
+              required />
+            <span *ngIf="title?.errors?.['maxlength']" class="form__error-message">
+              You have exceeded the maximum number of 200 characters
+            </span>
+          </div>
+
+          <div class="form__field">
+            <div class="form__label-wrapper">
+              <label for="type" class="form__label">Type</label>
+              <span *ngIf="type?.errors?.['required'] && type?.touched" class="form__error-message">
+                Field can't be empty
+              </span>
+            </div>
+            <ng-select
+              class="custom"
+              id="type"
+              formControlName="type"
+              placeholder="Select question type"
+              required
+              [clearable]="false"
+              [multiple]="false"
+              [searchable]="false">
+              <ng-option *ngFor="let type of types" [value]="type._id">{{ type.name }}</ng-option>
+            </ng-select>
+          </div>
+
+                <div class="form__field">
+                    <div class="form__label-wrapper">
+                        <label for="link" class="form__label">Link</label>
+                        <span *ngIf="link?.errors?.['pattern']" class="form__error-message">
+                            Invalid link format. Please enter a valid URL.
+                        </span>
+                    </div>
+                    <input 
+                        id="link" 
+                        type="url" 
+                        class="form__input" 
+                        formControlName="link" 
+                        placeholder="Type link" 
+                    >
+                    <span *ngIf="link?.errors?.['maxlength']" class="form__error-message">
+                        You have exceeded the maximum number of 2048 characters
+                    </span>
+        </div>
+
+          <div class="form__field">
+            <div class="form__label-wrapper">
+              <label for="description" class="form__label">Description</label>
+              <span
+                *ngIf="description?.errors?.['required'] && description?.touched"
+                class="form__error-message">
+                Field can't be empty
+              </span>
+            </div>
+            <textarea
+              #textareaElement
+              id="description"
+              cols="30"
+              rows="10"
+              formControlName="description"
+              placeholder="Type text"
+              class="form__input"
+              required
+              (input)="(textareaElement.value.length)"></textarea>
+            <span *ngIf="description?.errors?.['maxlength']" class="form__error-message">
+              You have exceeded the maximum number of 800 characters
+            </span>
+          </div>
+          <p class="char-counter">{{ textareaElement.value.length || 0 }}/800</p>
+        </form>
+      </div>
+
+      <div
+        class="vacancy__task-questions"
+        [ngClass]="{'vacancy__task-questions--edit': isEditMode}">
+        <div class="vacancy__task-questions__container">
+          <div class="vacancy__task-questions__header">Task questions ({{ taskCounter }})</div>
+          <span *ngIf="taskCounter === 0" class="no-questions">No questions yet</span>
+          <div class="scroll-task-container">
+            <ng-container *ngFor="let taskQuestion of taskQuestions">
+              <ta-question-item
+                [question]="taskQuestion"
+                [isDefault]="false"
+                [showRemoveIcon]="!isEditMode"
+                (removeClicked)="onRemoveQuestionClick($event)"></ta-question-item>
+            </ng-container>
+          </div>
+        </div>
+        <div class="vacancy__task-questions__total">
+          <span class="total-time">Total time</span>
+          <span class="time-count">{{ totalTime }} min</span>
+        </div>
+      </div>
+
+      <div class="vacancy__lib-questions" *ngIf="!isEditMode">
+        <div class="vacancy__lib-questions__container">
+          <div class="vacancy__lib-questions__header">
+            <span *ngIf="!isSearchActive" class="vacancy__lib-questions__header__span"
+              >Library questions</span
+            >
+            <div class="icons" [ngClass]="{active: isSearchActive}">
+              <div class="search" [ngClass]="{active: isSearchActive}">
+                <input
+                  id="searchInput"
+                  type="text"
+                  class="search__input"
+                  placeholder="Search"
+                  *ngIf="isSearchActive"
+                  [(ngModel)]="searchQuery"
+                  (input)="onSearch($event)"
+                  #searchInput />
+                <img
+                  *ngIf="libraryQuestions.length > 1"
+                  [src]="isSearchActive ? 'assets/icons/close.svg' : 'assets/icons/search.svg'"
+                  alt="search-icon"
+                  class="search-icon"
+                  [ngClass]="{active: isSearchActive}"
+                  (click)="toggleSearch()" />
+              </div>
+              <img
+                src="assets/icons/plus.svg"
+                alt="add-icon"
+                (click)="openModalAddEditQuestion()" />
+            </div>
+          </div>
+          <div *ngIf="libraryQuestions.length > 0" class="info-header">
+            <span class="uppercase-text">Question</span>
+            <span class="uppercase-text">time, min</span>
+          </div>
+          <ng-container *ngIf="(loading$ | async) && page === 0; else questions" class="loader">
+            <ta-loader></ta-loader>
+          </ng-container>
+          <ng-template #questions>
+            <div
+              infinite-scroll
+              [infiniteScrollThrottle]="500"
+              (scrolled)="onScroll()"
+              [scrollWindow]="false"
+              class="scroll-lib-container">
+              <ng-container *ngFor="let question of libraryQuestions">
+                <ta-question-item
+                  [question]="question"
+                  [isDefault]="false"
+                  [isTaskQuestion]="true"
+                  (itemClicked)="onQuestionItemClick($event)"></ta-question-item>
+              </ng-container>
+              <span *ngIf="libraryQuestions.length === 0" class="no-questions"
+                >No questions yet</span
+              >
+            </div>
+          </ng-template>
+        </div>
+      </div>
+    </div>
+  </div>
+</ng-template>

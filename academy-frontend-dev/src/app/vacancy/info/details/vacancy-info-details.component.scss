@@ -1,0 +1,61 @@
+@import 'src/styles/variables.scss';
+@import '../general-styles';
+
+%button-navigation {
+  border: none;
+  cursor: pointer;
+  appearance: none;
+  background-color: inherit;
+  padding: 0;
+}
+
+.vacancy-info-details {
+  margin-top: 24px;
+}
+
+.top-block {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 19px;
+  &__title {
+    display: flex;
+    align-items: center;
+    margin: 0 3px 0 0;
+    img {
+      cursor: pointer;
+      margin-right: 2px;
+    }
+  }
+  &__buttons {
+    display: flex;
+    & > *:not(:last-child) {
+      margin-right: 10px;
+    }
+  }
+  &__button {
+    @extend %button-navigation;
+    color: #007672;
+    border: 2px solid #007672;
+    width: 40px;
+    height: 40px;
+    font-size: 20px;
+  }
+  &__button:disabled {
+    filter: brightness(0) saturate(100%) invert(48%) sepia(2%) saturate(14%) hue-rotate(18deg)
+      brightness(91%) contrast(86%);
+  }
+}
+
+.main-block {
+  display: flex;
+  column-gap: 10px;
+
+  & > * {
+    flex: 1 0 33%;
+  }
+}
+
+.mat-icon {
+  transform: scale(1.2);
+}

@@ -1,0 +1,81 @@
+@import 'src/styles/variables.scss';
+
+.vacancy-answer {
+  margin: 30px 0 28px 0;
+}
+.table {
+  &__title {
+    margin: 31px 0 21px 21px;
+  }
+  &__container {
+    max-height: 601px;
+    max-width: 100%;
+    overflow: auto;
+    background-color: $white;
+    box-shadow: $box-shadow;
+  }
+}
+
+.mat-table {
+  .header-cell {
+    color: $black;
+    font-family: 'Open Sans', sans-serif;
+    font-size: 11px;
+    font-style: normal;
+    font-weight: 700;
+    text-transform: uppercase;
+  }
+
+  .no-data {
+    font-family: Raleway, sans-serif;
+    font-size: 14px;
+    font-weight: 800;
+    letter-spacing: 0.5px;
+    text-align: center;
+  }
+
+  .no-border {
+    border-bottom: 3px solid transparent;
+  }
+
+  .question-cell-width {
+    width: 49.9%;
+    padding-inline: 25px;
+  }
+
+  .cell-width {
+    width: 12%;
+  }
+  .mat-mdc-header-row {
+    z-index: 100;
+    box-shadow: $box-shadow;
+  }
+
+  .icon-cell-width {
+    width: 4%;
+  }
+
+  .icon {
+    text-align: center;
+    display: none;
+  }
+  .mat-mdc-row:hover {
+    .icon {
+      display: block;
+    }
+  }
+  &__status {
+    color: $white;
+    font-size: 9px;
+    font-weight: 700;
+    padding: 5px;
+    border-radius: 2px;
+    text-transform: uppercase;
+    &_answered {
+      background-color: $light-pine-green;
+    }
+    &_evaluated {
+      background-color: $blue;
+    }
+  }
+}

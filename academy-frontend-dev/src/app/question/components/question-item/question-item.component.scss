@@ -1,0 +1,117 @@
+@import 'src/styles/variables.scss';
+@import 'src/styles/mixins.scss';
+
+.question {
+  padding: 10px 20px;
+  display: flex;
+  cursor: pointer;
+  gap: 10px;
+  border-bottom: 1px solid $grey;
+
+  &:hover {
+    @include hover-transition;
+    cursor: pointer;
+    background-color: $pine-green-translucent;
+
+    .question__icon {
+      opacity: 1;
+    }
+  }
+
+  &__title {
+    margin: 0;
+    color: $black;
+    font-family: 'Open Sans';
+    font-size: 13px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+  }
+
+  &__item {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    flex-grow: 1;
+  }
+
+  &__type-wrapper {
+    display: flex;
+    gap: 4px;
+  }
+
+  &__topic {
+    padding: 1px 3px;
+    font-size: 11px;
+    font-weight: 400;
+    border-radius: 2px;
+    background: #eee;
+    font-family: 'Open Sans';
+  }
+
+  &__description {
+    color: $black;
+    font-family: 'Open Sans';
+    font-size: 13px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+  }
+
+  &__icons {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+  }
+
+  &__time {
+    color: #101820;
+    font-family: 'Open Sans';
+    font-size: 11px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+    text-align: center;
+  }
+
+  &__icon {
+    display: flex;
+    position: relative;
+    justify-content: flex-start;
+    align-items: center;
+    padding: 0.5rem;
+    width: 32px;
+    height: 32px;
+    opacity: 0;
+    background: none;
+    border: none;
+  }
+
+  &__action-icons {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+
+    &__button {
+      background: transparent;
+      border: none;
+
+      .mat-icon {
+        overflow: unset;
+      }
+    }
+
+    &__button:hover {
+      .icon {
+        opacity: 1;
+      }
+    }
+
+    .icon {
+      opacity: 0.6;
+    }
+  }
+}

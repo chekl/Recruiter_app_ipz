@@ -1,0 +1,95 @@
+<ng-container *ngIf="(loading$ | async) || !application; else candidate">
+  <ta-loader></ta-loader>
+</ng-container>
+<ng-template #candidate>
+  <div class="container">
+    <div class="title-block">
+      <ta-vacancy-title
+        [vacancyType]="application.vacancy.type.name"
+        [vacancyTitle]="application.vacancy.title"></ta-vacancy-title>
+    </div>
+    <div class="description mat-body-2">
+      <div #descriptionEl class="description__element">
+        <span #desc class="text-ellipsis">{{ application.vacancy.description }}</span>
+      </div>
+      <div class="description__buttons">
+        <button *ngIf="truncated && isShowMore" (click)="showMore(desc, descriptionEl)">
+          view more
+        </button>
+        <button *ngIf="!truncated && !isShowMore" (click)="showMore(desc, descriptionEl)">
+          view less
+        </button>
+      </div>
+    </div>
+    <div class="cards">
+      <ta-info-card
+        class="cards__info-card"
+        titleText="Completed questions"
+        [isSpan]="true"
+        [spanCompletedValue]="(completedQuestionCount$ | async) ?? 0"
+        [spanMaximumValue]="application.questions.length"
+        buttonText="Submit"
+        [isFlatButton]="true"
+        [isButtonDisabled]="completedQuestionCount$.value !== application.questions.length"
+        (buttonClicked)="submitTest()"></ta-info-card>
+      <ta-info-card
+        class="cards__info-card"
+        titleText="Execution time"
+        [contentText]="application.executionTime | timeFormat"></ta-info-card>
+    </div>
+    <div class="table">
+      <div class="table__title-block">
+        <h5 class="mat-headline-5">Questions list</h5>
+      </div>
+      <table mat-table [dataSource]="application.questions">
+        <ng-container matColumnDef="name">
+          <th mat-header-cell class="mat-caption row__name-cell" *matHeaderCellDef>Name</th>
+          <td mat-cell class="mat-body-2" *matCellDef="let question; let i = index">
+            {{ i < completedQuestionCount$.value ? question.title : 'Question ' + (i + 1) }}
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="type">
+          <th mat-header-cell class="mat-caption" *matHeaderCellDef>Type</th>
+          <td mat-cell class="mat-body-2" *matCellDef="let question">
+            <div class="row__cell-container">
+              <img [src]="environment.backUrl + question.type.link" [alt]="question.type.name" />
+              <span>{{ question.type.name }}</span>
+            </div>
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="status">
+          <th mat-header-cell class="mat-caption" *matHeaderCellDef>Status</th>
+          <td mat-cell class="mat-body-2" *matCellDef="let i = index">
+            <div class="row__cell-container row__status-cell">
+              <ng-container *ngIf="i === completedQuestionCount$.value; else doneTemplate">
+                <img src="assets/icons/right-arr.svg" alt="continue-icon" />
+                <span class="row__hint">CONTINUE</span>
+              </ng-container>
+
+              <ng-template #doneTemplate>
+                <ng-container *ngIf="i < completedQuestionCount$.value; else lockedTemplate">
+                  <img src="assets/icons/done-icon.svg" alt="continue-icon" />
+                  <span class="row__hint">DONE</span>
+                </ng-container>
+              </ng-template>
+
+              <ng-template #lockedTemplate>
+                <img src="assets/icons/locked-icon.svg" alt="continue-icon" />
+                <span class="row__hint row__hint--locked">LOCKED</span>
+              </ng-template>
+            </div>
+          </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="columnsToDisplay"></tr>
+        <tr
+          mat-row
+          *matRowDef="let question; columns: columnsToDisplay; let i = index"
+          [ngClass]="i <= completedQuestionCount$.value ? 'row' : 'row row--disabled'"
+          (click)="i === completedQuestionCount$.value && openModalDetailsQuestion()"></tr>
+      </table>
+    </div>
+  </div>
+</ng-template>

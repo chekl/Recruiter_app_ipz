@@ -1,0 +1,32 @@
+<mat-toolbar class="toolbar">
+  <nav class="toolbar__wrapper container">
+    <div class="toolbar__tab-container mat-subtitle-2">
+      <div class="toolbar__tab-element" routerLinkActive="active">
+        <a class="toolbar__tab-link" routerLink="/vacancy"
+          ><span class="toolbar__tab-label">Vacancies</span></a
+        >
+        <a routerLink="/application" style="display: none"></a>
+      </div>
+      <a class="toolbar__tab-element" routerLink="/question" routerLinkActive="active">
+        <span class="toolbar__tab-label">Questions</span>
+      </a>
+    </div>
+    <div
+      *ngIf="currentUser"
+      class="avatar__container"
+      [matMenuTriggerFor]="menu"
+      [matTooltip]="currentUser.firstName + ' ' + currentUser.lastName"
+      matTooltipClass="tooltip tooltip__left"
+      matTooltipPosition="left">
+      <div class="avatar__initials">
+        {{ initials }}
+      </div>
+      <mat-menu #menu="matMenu" xPosition="before">
+        <button mat-menu-item (click)="logout()">
+          <mat-icon>logout</mat-icon>
+          <span>Log out</span>
+        </button>
+      </mat-menu>
+    </div>
+  </nav>
+</mat-toolbar>

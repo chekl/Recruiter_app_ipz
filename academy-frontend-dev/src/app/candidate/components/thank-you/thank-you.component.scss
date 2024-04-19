@@ -1,0 +1,30 @@
+@import 'src/styles/variables.scss';
+@import 'src/styles/layout-pages.scss';
+
+.container__hero {
+  img {
+    width: 720px;
+    height: 290px;
+    margin: 0 0 54px;
+  }
+}
+
+.mat-headline-2 {
+  width: fit-content;
+  margin: 0 0 40px;
+}
+
+.mat-headline-1,
+.mat-headline-2 {
+  color: $pink;
+}
+
+span {
+  color: $dark-grey;
+  text-align: center;
+  font-family: Raleway, sans-serif;
+  font-size: 15px;
+  font-weight: 700;
+  line-height: 150%;
+  width: 396px;
+}

@@ -1,0 +1,15 @@
+{
+  "name": "Recruiter App Backend API Documentation",
+  "version": "0.0.0",
+  "description": "API documentation for recruiter app backend",
+  "title": "Recruiter App Backend API",
+  "url" : "http://api.example.com/api",
+  "sampleUrl" : "http://3.71.35.244/api",
+  "header": {
+    "title": "Recruiter App Backend"
+  },
+  "template": {
+    "withCompare": true,
+    "withGenerator": true
+  }
+}

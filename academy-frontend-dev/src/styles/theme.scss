@@ -1,0 +1,87 @@
+@use 'sass:map';
+@use '@angular/material' as mat;
+
+@include mat.core();
+@import './typography.scss';
+
+$md-accent-palette: (
+  50: #fbe0ea,
+  100: #f6b3ca,
+  200: #f080a6,
+  300: #e94d82,
+  400: #e52668,
+  500: #e0004d,
+  600: #dc0046,
+  700: #d8003d,
+  800: #d30034,
+  900: #cb0025,
+  A100: #fff3f4,
+  A200: #ffc0c7,
+  A400: #ff8d9a,
+  A700: #ff7484,
+  contrast: (
+    50: #000000,
+    100: #000000,
+    200: #000000,
+    300: #000000,
+    400: #ffffff,
+    500: #ffffff,
+    600: #ffffff,
+    700: #ffffff,
+    800: #ffffff,
+    900: #ffffff,
+    A100: #000000,
+    A200: #000000,
+    A400: #000000,
+    A700: #000000
+  )
+);
+
+$md-primary-palette: (
+  50: #e0efee,
+  100: #b3d6d5,
+  200: #80bbb9,
+  300: #00b2a9,
+  400: #268b87,
+  500: #007672,
+  600: #006e6a,
+  700: #00635f,
+  800: #005955,
+  900: #004642,
+  A100: #7afff5,
+  A200: #47fff1,
+  A400: #14ffee,
+  A700: #00fae7,
+  contrast: (
+    50: #000000,
+    100: #000000,
+    200: #000000,
+    300: #000000,
+    400: #ffffff,
+    500: #ffffff,
+    600: #ffffff,
+    700: #ffffff,
+    800: #ffffff,
+    900: #ffffff,
+    A100: #000000,
+    A200: #000000,
+    A400: #000000,
+    A700: #000000
+  )
+);
+
+$primary: mat.define-palette($md-primary-palette, 500);
+$accent: mat.define-palette($md-accent-palette);
+$warn: mat.define-palette($md-accent-palette, 500);
+
+$theme: mat.define-light-theme(
+  (
+    typography: $typography-config,
+    color: (
+      primary: $primary,
+      accent: $accent,
+      warn: $warn
+    )
+  )
+);
+@include mat.all-component-themes($theme);

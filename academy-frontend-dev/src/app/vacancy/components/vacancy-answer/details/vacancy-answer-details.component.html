@@ -1,0 +1,35 @@
+<div class="vacancy-answer-details">
+  <div class="header">
+    <img src="assets/icons/previous-arr.svg" alt="previous" (click)="navigateBack()">
+    <div class="header__title-block">
+      <h1 class="header__title mat-headline-5" *ngIf="application && application.candidate">
+        {{application.candidate.firstName + " " + application.candidate.lastName}}
+      </h1>
+      <h5 class="header__subtitle" *ngIf="application && application.vacancy">{{application.vacancy.title}}</h5>
+    </div>
+  </div>
+  <div class="main-block">
+    <ta-info-card *ngIf="isReviewer"
+                  [titleText]="'Application Score'"
+                  [isFlatButton]="false"
+                  [buttonText]="'Submit'"
+                  [isPercent]= "!!application?.score"
+                  [contentText]="application?.score && String(application?.score) || '--'"
+                  (buttonClicked)="onSubmit()"
+                  [isLoading]="isLoading"
+    >
+
+    </ta-info-card>
+    <ta-info-card *ngIf="!isReviewer"
+                  [titleText]="'Application Score'"
+                  [isPercent]= "!!application?.score"
+                  [contentText]="application?.score && String(application?.score) || '--'"
+    >
+
+    </ta-info-card>
+    <ta-info-card [titleText]="'Application Rank'"
+                  [contentText]="application?.rank && String(application?.rank) || '--'">
+
+    </ta-info-card>
+  </div>
+</div>

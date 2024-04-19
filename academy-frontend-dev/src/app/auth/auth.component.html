@@ -1,0 +1,25 @@
+<ng-container *ngIf="loading$ | async; else auth">
+  <ta-loader></ta-loader>
+</ng-container>
+<ng-template #auth>
+  <section class="auth">
+  <figure title="Recruiter App Logo" class="auth__logo">
+    <img src="assets/icons/logo.svg" width="65" height="52" />
+    <figcaption class="mat-headline-2">Recruiter App</figcaption>
+  </figure>
+
+  <div class="auth__container">
+    <p class="mat-body-1">
+      Authorize with your <span class="auth__email">@techmagic.co</span> email
+    </p>
+
+    <button mat-flat-button color="primary" (click)="singin()">
+      Sign in with google
+    </button>
+  </div>
+  <p class="auth__copyright mat-body-2">
+    &copy; TECHMAGIC 2016-{{ copyrightDateEnd | date: 'yyyy' }}
+  </p>
+</section>
+</ng-template>
+

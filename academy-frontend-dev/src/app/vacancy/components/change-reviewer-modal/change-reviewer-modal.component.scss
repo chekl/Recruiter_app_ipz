@@ -1,0 +1,78 @@
+@use '@angular/material' as mat;
+@import 'src/styles/variables.scss';
+@import 'src/styles/typography.scss';
+
+.modal-form {
+  flex: 0 1 auto;
+
+  &__label {
+    font-family: $opensans-font-family;
+    font-size: 14px;
+    font-weight: 400;
+  }
+
+  &__input {
+    padding: 7px 9px;
+    border: 2px $silver-gray solid;
+    border-radius: 2px;
+    width: 100%;
+  }
+
+  &__input:focus {
+    outline: none;
+  }
+
+  &__field {
+    margin: 0px 0px 15px 0px;
+  }
+
+  &__notes {
+    margin-bottom: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  &__error-msg {
+    color: $pink;
+    font-size: 10px;
+    font-family: $raleway-font-family;
+    font-weight: 600;
+    display: block;
+  }
+}
+
+.option-icon {
+  width: 32px;
+  height: 32px;
+}
+
+.option-value {
+  color: $black;
+  font-size: 14px;
+  font-family: $opensans-font-family;
+  padding: 8px 0px 9px 0px;
+}
+
+::ng-deep body .mdc-menu-surface {
+  &.mat-mdc-autocomplete-panel {
+    border: 2px solid $silver-gray;
+    border-radius: 0px;
+  }
+}
+
+::ng-deep .mdc-list-item__primary-text {
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+
+.modal-form__actions {
+  margin-top: 45px;
+  display: flex;
+  justify-content: end;
+}
+
+::ng-deep body .mdc-menu-surface .mat-mdc-option {
+  padding: 0;
+}

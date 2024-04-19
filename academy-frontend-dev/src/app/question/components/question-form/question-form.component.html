@@ -1,0 +1,59 @@
+<form class="filterQuestion" [formGroup]="filterQuestionForm">
+  <div class="filterQuestion__field">
+    <label class="filterQuestion__label" for="title">Title</label>
+    <input
+      class="filterQuestion__input"
+      #questionTitle
+      type="text"
+      id="title"
+      formControlName="title"
+      placeholder="Type question title"
+      (focus)="onFocus(questionTitle)"
+      (blur)="onBlur(questionTitle)" />
+    <div class="filterQuestion__error-message" *ngIf="title?.errors?.['titleInvalid']">
+      Type 3 characters or leave the field empty
+    </div>
+  </div>
+
+  <div class="filterQuestion__field">
+    <label class="filterQuestion__label" for="types">Type</label>
+    <ng-select
+      class="filterQuestion__types"
+      id="types"
+      formControlName="type"
+      placeholder="Select question type"
+      [searchable]="false"
+      [clearable]="true"
+      [multiple]="false">
+      <ng-option [disabled]="true" *ngIf="loadingService.loadingQuestionTypes; else typeList">
+        <ta-loader [diameter]="17"></ta-loader>
+      </ng-option>
+      <ng-template #typeList
+        ><ng-option *ngFor="let type of types$ | async" [value]="type._id">{{
+          type.name
+        }}</ng-option></ng-template
+      >
+    </ng-select>
+  </div>
+
+  <div class="filterQuestion__field">
+    <label class="filterQuestion__label" for="topics">Topics</label>
+    <ng-select
+      class="filterQuestion__topics"
+      id="topics"
+      formControlName="topics"
+      placeholder="Type text"
+      [searchable]="true"
+      [clearable]="true"
+      [multiple]="true">
+      <ng-option [disabled]="true" *ngIf="loadingService.loadingQuestionTopics; else topicList">
+        <ta-loader [diameter]="17"></ta-loader>
+      </ng-option>
+      <ng-template #topicList
+        ><ng-option *ngFor="let topic of topics$ | async" [value]="topic._id">{{
+          topic.name
+        }}</ng-option></ng-template
+      >
+    </ng-select>
+  </div>
+</form>

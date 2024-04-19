@@ -1,0 +1,24 @@
+.container {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+  background: #fdfdfd;
+}
+
+.container__hero {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  width: 100%;
+}
+
+.mat-headline-1 {
+  text-transform: uppercase;
+  margin: 0 0 12px;
+}
+
+.mat-headline-2 {
+  width: fit-content;
+}

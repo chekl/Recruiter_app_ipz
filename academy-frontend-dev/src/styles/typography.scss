@@ -1,0 +1,24 @@
+/*
+    headline-5: <h1> tag
+    headline-6: <h2> tag
+    subtitle-1: <h3> tag
+    subtitle-2: <h4> tag
+    body-1: base body text
+    body-2: secondary body text
+*/
+$opensans-font-family: 'Open Sans', sans-serif;
+$raleway-font-family: 'Raleway';
+$typography-config: mat.define-typography-config(
+  $headline-1: mat.define-typography-level(54px, 63px, 900, $raleway-font-family),
+  $headline-2: mat.define-typography-level(40px, 44px, 800, $raleway-font-family),
+  $headline-4: mat.define-typography-level(10px, 12px, 600, $raleway-font-family),
+  $headline-5: mat.define-typography-level(24px, 28px, 800, $raleway-font-family),
+  $headline-6: mat.define-typography-level(24px, 24px, 700, $opensans-font-family),
+  $subtitle-1: mat.define-typography-level(15px, 17px, 700, $raleway-font-family),
+  $subtitle-2: mat.define-typography-level(14px, 16px, 800, $raleway-font-family),
+  $body-1: mat.define-typography-level(14px, 19px, 400, $opensans-font-family),
+  $body-2: mat.define-typography-level(13px, 17px, 400, $opensans-font-family),
+  $caption: mat.define-typography-level(11px, 15px, 700, $opensans-font-family),
+  $button: mat.define-typography-level(14px, 16px, 800, $raleway-font-family)
+);
+@include mat.typography-hierarchy($typography-config);

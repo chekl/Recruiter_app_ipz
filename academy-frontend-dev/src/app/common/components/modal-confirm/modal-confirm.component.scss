@@ -1,0 +1,11 @@
+@use '@angular/material' as mat;
+@import 'src/styles/variables.scss';
+@import 'src/styles/typography.scss';
+@import 'src/styles/material.scss';
+
+.modal__btn-group {
+  display: flex;
+  align-self: flex-end;
+  gap: 0.75rem;
+  margin-top: 1rem;
+}

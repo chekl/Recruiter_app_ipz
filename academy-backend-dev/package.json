@@ -1,0 +1,61 @@
+{
+  "name": "tc-backend",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.ts",
+  "scripts": {
+    "start": "nodemon",
+    "start:pm2": "ts-node index.ts",
+    "docs": "apidoc -c ./apidoc.json -i ./controllers/ -o docs",
+    "postinstall": "npx husky install"
+  },
+  "engines": {
+    "node": ">=20.0.0",
+    "npm": ">=10.0.0"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@types/cookie-parser": "^1.4.5",
+    "apidoc": "^1.2.0",
+    "config": "^3.3.9",
+    "cookie-parser": "^1.4.6",
+    "cors": "^2.8.5",
+    "ejs": "^3.1.9",
+    "express": "^4.18.2",
+    "google-auth-library": "^9.4.2",
+    "joi": "^17.11.0",
+    "mongoose": "^8.0.0",
+    "morgan": "^1.10.0",
+    "nodemailer": "^6.9.8"
+  },
+  "devDependencies": {
+    "@types/config": "^3.3.2",
+    "@types/cors": "^2.8.15",
+    "@types/ejs": "^3.1.5",
+    "@types/express": "^4.17.20",
+    "@types/morgan": "^1.9.7",
+    "@types/node": "^20.8.10",
+    "@types/nodemailer": "^6.4.14",
+    "eslint": "^8.52.0",
+    "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-config-airbnb-typescript": "^17.1.0",
+    "eslint-config-prettier": "^9.0.0",
+    "eslint-plugin-prettier": "^5.0.1",
+    "eslint-plugin-security": "^1.7.1",
+    "husky": "^8.0.3",
+    "lint-staged": "^15.0.2",
+    "nodemon": "^3.0.1",
+    "prettier": "^3.0.3",
+    "prettier-eslint": "^16.1.2",
+    "ts-node": "^10.9.1",
+    "tsconfig-paths": "^4.2.0",
+    "typescript": "^4.9.5"
+  },
+  "lint-staged": {
+    "*.ts": [
+      "prettier --write --config ./.prettierrc.json '*.ts'",
+      "eslint"
+    ]
+  }
+}

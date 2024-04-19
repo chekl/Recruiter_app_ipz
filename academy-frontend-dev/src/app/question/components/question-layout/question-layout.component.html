@@ -1,0 +1,41 @@
+<div class="question">
+  <div class="question__heading">
+    <h1 class="question__h1">Library questions</h1>
+    <button mat-flat-button color="primary" (click)="openModalAddEditQuestion()">Create new</button>
+  </div>
+  <div class="question__content">
+    <div class="question__container question__container-filter">
+      <p class="question__info question__title">Filter settings</p>
+      <ta-question-form></ta-question-form>
+    </div>
+    <div class="question__container">
+      <div class="question__info">
+        <span class="question__title">Questions ({{ counter }})</span>
+        <div class="question__sort-by-time">
+          <span class="question__time">Time, Min</span>
+          <img
+            *ngIf="questionList.length > 1"
+            (click)="sortQuestions()"
+            [src]="sortArrowSvgPath"
+            alt="sort arrow" />
+        </div>
+      </div>
+      <ng-container *ngIf="loadingService.loadingQuestions && page === 0; else questions">
+        <ta-loader></ta-loader>
+      </ng-container>
+      <ng-template #questions>
+        <div
+          class="search-results"
+          infinite-scroll
+          [infiniteScrollThrottle]="50"
+          (scrolled)="onScroll()"
+          [scrollWindow]="false">
+          <ng-container *ngFor="let question of questionList">
+            <ta-question-item [question]="question"></ta-question-item>
+          </ng-container>
+          <p *ngIf="counter === 0" class="question__empty">No questions yet</p>
+        </div>
+      </ng-template>
+    </div>
+  </div>
+</div>

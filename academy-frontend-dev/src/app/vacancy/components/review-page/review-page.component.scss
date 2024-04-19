@@ -1,0 +1,83 @@
+@import 'src/styles/variables.scss';
+
+.review-page {
+  display: flex;
+  flex-direction: column;
+
+  &__header {
+    display: flex;
+    align-items: flex-start;
+    margin-top: 28px;
+
+    img {
+      margin-right: 12px;
+      cursor: pointer;
+    }
+  }
+
+  &__table-container {
+    max-height: 720px;
+    max-width: 100%;
+    overflow: auto;
+    background-color: $white;
+    box-shadow: $box-shadow;
+  }
+}
+
+.mat-table {
+  .header-cell {
+    color: $black;
+    font-family: Open Sans;
+    font-size: 11px;
+    font-style: normal;
+    font-weight: 700;
+    text-transform: uppercase;
+  }
+
+  .no-data {
+    font-family: Raleway;
+    font-size: 14px;
+    font-weight: 800;
+    letter-spacing: 0.5px;
+  }
+
+  .vacancy-cell-width {
+    width: 49.9%;
+    padding-inline: 50px;
+    padding-left: 20px;
+
+    &:first-child {
+      padding-inline: 56px !important;
+    }
+  }
+
+  .cell-width {
+    width: 15%;
+  }
+
+  .icon {
+    text-align: center;
+    display: none;
+
+    &__btn {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      cursor: pointer;
+      background: none;
+      border: none;
+      padding: 0;
+    }
+  }
+
+  .mat-mdc-row:hover {
+    .icon {
+      display: block;
+    }
+  }
+
+  .mat-mdc-header-row {
+    z-index: 100;
+    box-shadow: $box-shadow;
+  }
+}

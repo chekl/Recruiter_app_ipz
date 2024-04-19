@@ -1,0 +1,298 @@
+@import 'src/styles/variables.scss';
+
+.vacancy {
+  &__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 20px 0;
+    h1 {
+      padding-left: 20px;
+      margin: 0;
+    }
+  }
+
+  &__content {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+  }
+
+  &__form,
+  &__task-questions,
+  &__lib-questions {
+    height: 661px;
+    width: 33%;
+    background-color: $white;
+  }
+
+  &__task-questions--edit {
+    width: 66%;
+  }
+  &__task-questions__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  &__form {
+    padding: 20px;
+  }
+}
+
+.mat-mdc-unelevated-button {
+  width: 77px;
+}
+
+/* Form styling */
+.form {
+  &__field {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    margin-bottom: 15px;
+  }
+
+  &__label-wrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  &__label {
+    padding-left: 8px;
+    font-family: 'Open Sans';
+    font-size: 14px;
+    font-weight: 400;
+  }
+
+  &__error-message {
+    font-family: Raleway;
+    font-size: 10px;
+    font-weight: 600;
+    color: $pink;
+    text-align: end;
+  }
+
+  &__input {
+    padding: 9px;
+    font-family: 'Open Sans';
+    font-size: 14px;
+    color: $black;
+    font-weight: 400;
+    border: 2px solid #ddd;
+    border-radius: 2px;
+    &:focus {
+      outline: none;
+    }
+  }
+
+  .char-counter {
+    color: #999;
+    text-align: right;
+    font-family: 'Open Sans';
+    font-size: 14px;
+  }
+}
+
+.ng-select.custom ::ng-deep .ng-select-container {
+  border-radius: 2px;
+  border: 2px solid #ddd;
+}
+
+::ng-deep {
+  .ng-select {
+    .ng-dropdown-panel-items {
+      .ng-option.ng-option-marked {
+        background-color: $light-gray;
+      }
+      .ng-option.ng-option-selected {
+        background-color: $light-gray;
+
+        &.ng-option-marked {
+          background-color: $silver-gray;
+        }
+      }
+    }
+    &.ng-select-focused:not(.ng-select-opened) > .ng-select-container {
+      border-color: $grey;
+      box-shadow:
+        inset 0 1px 1px rgba(0, 0, 0, 0),
+        0 0 0 3px rgba(0, 0, 0, 0);
+    }
+  }
+}
+
+.ng-dropdown-panel-items {
+  .ng-option.ng-option-marked {
+    background-color: $light-gray;
+  }
+
+  .ng-option.ng-option-selected {
+    background-color: $light-gray;
+
+    &.ng-option-marked {
+      background-color: $silver-gray;
+    }
+  }
+}
+
+.ng-select.custom ::ng-deep .ng-select-container .ng-value-container .ng-placeholder {
+  font-family: 'Open Sans';
+  font-size: 14px;
+  color: #999;
+  font-weight: 400;
+}
+
+/* Task questions styling */
+.vacancy__task-questions {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+  &__header {
+    padding: 15px 20px;
+    font-family: Raleway;
+    font-size: 15px;
+    font-weight: 700;
+    box-shadow: $box-shadow;
+  }
+
+  &__container {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    box-shadow: $box-shadow;
+    height: 100%;
+  }
+
+  &__total {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 20px;
+
+    .total-time,
+    .time-count {
+      font-family: 'Open Sans';
+      font-size: 14px;
+      font-weight: 700;
+      text-transform: uppercase;
+    }
+
+    .time-count {
+      color: $pink;
+    }
+  }
+
+  .scroll-task-container {
+    max-height: 553px;
+    overflow-y: scroll;
+  }
+}
+
+/* Library questions styling */
+.vacancy__lib-questions {
+  &__container {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    box-shadow: $box-shadow;
+    height: 100%;
+    position: relative;
+  }
+
+  &__header {
+    padding-right: 30px;
+    font-family: Raleway;
+    font-size: 15px;
+    font-weight: 700;
+    box-shadow: $box-shadow;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  &__header__span {
+    padding: 15px 20px;
+  }
+
+  .icons {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    justify-content: flex-end;
+
+    img {
+      cursor: pointer;
+    }
+  }
+
+  .info-header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 16px 30px 16px 46px;
+    border-bottom: 1px solid $grey;
+  }
+
+  .search {
+    border-radius: 2px;
+    height: 36px;
+    margin: 6px 10px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    border: 2px;
+
+    &__input {
+      border: none;
+      font-family: 'Open Sans';
+      font-size: 14px;
+      font-weight: 400;
+      padding-left: 9px;
+      outline: none;
+    }
+
+    .search-icon {
+      height: 16px;
+      padding-right: 9px;
+    }
+
+    .search-icon.active {
+      height: 12px;
+    }
+  }
+
+  .icons.active {
+    width: 100%;
+  }
+
+  .search.active {
+    border: 2px solid $grey;
+  }
+
+  .scroll-lib-container {
+    height: 565px;
+    overflow-y: scroll;
+  }
+}
+
+.no-questions {
+  display: block;
+  color: $pine-green;
+  text-align: center;
+  font-family: Raleway;
+  font-size: 14px;
+  font-weight: 800;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  margin-top: 60px;
+}
+
+.uppercase-text {
+  text-transform: uppercase;
+  font-family: 'Open Sans';
+  font-size: 11px;
+  font-weight: 700;
+}

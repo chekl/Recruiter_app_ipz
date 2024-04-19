@@ -1,0 +1,10 @@
+@import 'src/styles/variables.scss';
+
+.mat-headline-5 {
+  margin-bottom: 0;
+  text-transform: uppercase;
+  color: $dark-grey;
+  span {
+    color: $light-pine-green;
+  }
+}

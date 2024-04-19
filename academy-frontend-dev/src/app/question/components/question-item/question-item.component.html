@@ -1,0 +1,52 @@
+<div class="question">
+
+  <div *ngIf="!isDefault" class="question__action-icons">
+    <button class="question__action-icons__button" (click)="openModalDetailsQuestion()">
+      <mat-icon class="icon">visibility</mat-icon>
+    </button>
+    <ng-container *ngIf="showRemoveIcon">
+      <button class="question__action-icons__button" mat-icon-button *ngIf="isTaskQuestion" (click)="onItemClick()">
+        <mat-icon class="icon">add</mat-icon>
+      </button>
+      <button class="question__action-icons__button" mat-icon-button *ngIf="!isTaskQuestion" (click)="onItemClick()">
+        <mat-icon class="icon">remove</mat-icon>
+      </button>
+    </ng-container>
+  </div>
+
+  <div class="question__item" (click)="openModalDetailsQuestion()">
+    <p class="question__title">{{ question.title }}</p>
+    <div class="question__type-wrapper">
+      <img src="assets/icons/{{ question.type.name }}.svg" [alt]="question.type.name" />
+      <ng-container *ngFor="let topic of question.topics">
+        <div class="question__topic">{{ topic.name }}</div>
+      </ng-container>
+    </div>
+    <p *ngIf="isDefault" class="question__description">{{ question.description | truncate }}</p>
+  </div>
+  <div class="question__icons">
+    <div class="question__time">{{ question.time }}</div>
+    <button
+      *ngIf="isDefault"
+      matTooltip="Edit"
+      matTooltipClass="tooltip tooltip__left"
+      class="question__icon"
+      matTooltipPosition="left"
+      (click)="openEditModal()">
+      <img src="assets/icons/edit-pen.svg" alt="edit" class="question__pic" />
+    </button>
+    <button
+      *ngIf="isDefault"
+      [matTooltip]="isRemovable ? 'Remove' : 'Question in use'"
+      matTooltipClass="tooltip tooltip__left"
+      matTooltipPosition="left"
+      class="question__icon remove-icon"
+      (click)="openRemoveModal()"
+      [disabled]="!isRemovable">
+      <img
+        [src]="isRemovable ? 'assets/icons/delete-bin.svg' : 'assets/icons/delete-bin_disabled.svg'"
+        alt="delete"
+        class="question__pic" />
+    </button>
+  </div>
+</div>

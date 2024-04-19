@@ -1,0 +1,23 @@
+<ta-modal title="Question">
+    <field-wrapper label="Title">
+        <p main-content class="content__text">{{modalData.questionData.title}}</p>
+    </field-wrapper>
+
+    <field-wrapper label="Description">
+        <p main-content class="content__text">{{modalData.questionData.description}}</p>
+    </field-wrapper>
+
+        <field-wrapper label="Topics">
+        <div main-content>
+            <p *ngFor="let topics of modalData.questionData.topics" class="content__text content__text-topic">{{topics.name}}</p>
+        </div>
+        </field-wrapper>
+
+    <field-wrapper label="Type">        
+        <p main-content class="content__text">{{modalData.questionData.type.name}}</p>
+    </field-wrapper>
+
+    <field-wrapper label="Max Length">
+        <p main-content class="content__text content__text-time">{{formatTime(modalData.questionData.time)}}</p>
+    </field-wrapper>
+</ta-modal>

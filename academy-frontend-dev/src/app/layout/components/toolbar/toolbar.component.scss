@@ -1,0 +1,99 @@
+@import 'src/styles/variables.scss';
+
+:host {
+  width: 100%;
+}
+
+.toolbar {
+  display: flex;
+  justify-content: center;
+  background-color: $white;
+  box-shadow:
+    0 4px 25px rgba(0, 184, 178, 0.05),
+    0 4px 25px rgba(0, 0, 0, 0.05);
+
+  &__wrapper {
+    width: 1140px;
+    height: inherit;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  &__tab-container {
+    display: flex;
+    align-items: center;
+    height: 100%;
+    gap: 24px;
+    letter-spacing: 0.5px;
+  }
+
+  &__tab-element {
+    position: relative;
+    display: flex;
+    align-items: center;
+    height: 100%;
+    cursor: pointer;
+    color: $black;
+    opacity: 0.5;
+    outline: none;
+    transition: opacity 0.3s ease-in-out;
+
+    &.active {
+      opacity: 1;
+    }
+
+    &::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 3px;
+      background-color: $pine-green;
+      transform: scaleX(0);
+      transform-origin: left center;
+      transition: transform 0.3s ease-in-out;
+    }
+
+    &.active::after,
+    &:hover::after {
+      transform: scaleX(1);
+      outline: none;
+    }
+  }
+
+  &__tab-label {
+    text-transform: uppercase;
+  }
+
+  &__tab-link {
+    padding: 20px 0;
+    outline: none;
+  }
+
+  .avatar {
+    &__container {
+      height: 100%;
+      width: 64px;
+      position: relative;
+      display: flex;
+      align-items: center;
+      cursor: pointer;
+    }
+
+    &__image,
+    &__initials {
+      width: 64px;
+      height: 64px;
+      object-fit: cover;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-weight: bold;
+      font-size: 20px;
+      color: $white;
+      background-color: $pine-green;
+    }
+  }
+}

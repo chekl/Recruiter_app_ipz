@@ -1,0 +1,7 @@
+<div class="container__input">
+    <div class="input__header">
+      <label class="label" [for]="controlName">{{ label }}</label>
+      <ng-content select="[header-content]"></ng-content>
+    </div>
+    <ng-content select="[main-content]"></ng-content>
+</div>

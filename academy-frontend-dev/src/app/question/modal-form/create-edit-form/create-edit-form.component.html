@@ -1,0 +1,107 @@
+<ta-modal [title]="modalData?.isEdit ? 'Edit Question' : 'New Question'">
+  <form class="content" [formGroup]="questionForm" (ngSubmit)="onSubmit()">
+    <field-wrapper label="Title" controlName="title">
+      <validation-message header-content [control]="questionForm.get('title')"
+                          errorMessage="You have exceeded the maximum number of 250 characters in this field">
+      </validation-message>
+      <mat-form-field main-content class="input">
+        <input class="input__title" matInput formControlName="title" name="title" placeholder="Type question title"
+               id="title" />
+      </mat-form-field>
+    </field-wrapper>
+
+    <field-wrapper label="Description" controlName="description">
+      <validation-message header-content [control]="questionForm.get('description')"
+                          errorMessage="You have exceeded the maximum number of 800 characters in this field">
+      </validation-message>
+      <mat-form-field main-content class="textarea">
+        <textarea class="description" matInput formControlName="description" name="description" placeholder="Type text"
+                  id="description"></textarea>
+      </mat-form-field>
+    </field-wrapper>
+
+    <field-wrapper label="Topics" controlName="topics">
+      <validation-message header-content [control]="questionForm.get('topics')"
+                          errorMessage="Maximum 5 tags are allowed">
+      </validation-message>
+      <ng-select
+        bindValue="_id"
+        bindLabel="name"
+        main-content
+        class="topics"
+        formControlName="topics"
+        [items]="topics"
+        [placeholder]="'Type text'"
+        [searchable]="true"
+        [clearable]="false"
+        [multiple]="true"
+        addTagText="Create New"
+        [addTag]="createNewTopic">
+      </ng-select>
+    </field-wrapper>
+
+    <field-wrapper label="Type" controlName="type">
+      <validation-message header-content [control]="questionForm.get('type')"
+                          errorMessage="Field can't be empty"></validation-message>
+      <ng-select
+        main-content
+        formControlName="type"
+        [items]="types"
+        bindValue="_id"
+        bindLabel="name"
+        placeholder="Select question type"
+        [searchable]="false"
+        [clearable]="false"
+        [multiple]="false"
+      >
+      </ng-select>
+    </field-wrapper>
+
+    <div class="container__input-max-length">
+      <div class="input__header-max-length">
+        <label class="label-max-length">Max Length</label>
+        <validation-message *ngIf="timeChanged" header-content [control]="questionForm.get('time')"
+                            errorMessage="Min amount of time is 1 min"></validation-message>
+      </div>
+          <div class="container__button-max-length">
+      <button class="button-max-length" type="button" (click)="addTime(5)">
+        <span class="button__text-plus">+</span>5 min
+      </button>
+      <button class="button-max-length" type="button" (click)="addTime(15)">
+        <span class="button__text-plus">+</span>15 min
+      </button>
+      <button class="button-max-length" type="button" (click)="addTime(30)">
+        <span class="button__text-plus">+</span>30 min
+      </button>
+      <button class="button-max-length" type="button" (click)="addTime(60)">
+        <span class="button__text-plus">+</span>1 hour
+      </button>
+    </div>
+    <mat-form-field class="input__max-length">
+      <input matInput formControlName="time" readonly hidden/>
+      <span class="formatted-time">{{formatTime(questionForm.value.time)}}</span>
+    </mat-form-field>
+    <div class="container__button-plus-minus">
+      <button class="button_time-plus" type="button" (click)="addTime(1)">
+        <mat-icon color="primary">add</mat-icon>
+      </button>
+      <button class="button_time-minus" type="button" (click)="addTime(-1)">
+        <mat-icon color="primary">remove</mat-icon>
+      </button>
+    </div>
+  </div>
+
+
+    <div class="container__button_create-save">
+      <button class="mdc-button mat-mdc-outlined-button action-button mat-primary" type="submit"
+              [disabled]="!questionForm.valid || (!hasChanged && modalData?.isEdit) || isSubmitInProgress">
+        <ng-container *ngIf="isSubmitInProgress; else text">
+          <ta-loader [diameter]="30" color="White"></ta-loader>
+        </ng-container>
+        <ng-template #text>
+          {{ modalData?.isEdit ? 'Save' : 'Create' }}
+        </ng-template>
+      </button>
+    </div>
+  </form>
+</ta-modal>

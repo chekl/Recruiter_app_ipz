@@ -1,0 +1,24 @@
+@use '@angular/material' as mat;
+@import 'src/styles/variables.scss';
+@import 'src/styles/typography.scss';
+@import 'src/styles/material.scss';
+
+.content__text {
+  color: $black;
+  font-family: $opensans-font-family;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: normal;
+
+  &-topic {
+    display: inline-block;
+    background-color: #eee;
+    padding: 6px 8px 7px;
+    margin-right: 16px;
+  }
+
+  &-time {
+    font-size: 40px;
+    font-weight: 600;
+  }
+}

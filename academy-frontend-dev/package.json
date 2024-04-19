@@ -1,0 +1,47 @@
+{
+  "name": "hr",
+  "version": "0.0.1",
+  "scripts": {
+    "ng": "ng",
+    "start": "ng serve",
+    "build": "ng build --configuration production",
+    "watch": "ng build --watch --configuration development",
+    "test": "ng test",
+    "prepare": "husky install",
+    "pre-commit": "lint-staged"
+  },
+  "lint-staged": {
+    "src/**/*.{ts,json,css,scss,md}": [
+      "prettier --write --ignore-unknown"
+    ]
+  },
+  "private": true,
+  "dependencies": {
+    "@angular/animations": "^16.2.11",
+    "@angular/cdk": "^16.2.10",
+    "@angular/common": "^16.2.11",
+    "@angular/compiler": "^16.2.11",
+    "@angular/core": "^16.2.11",
+    "@angular/forms": "^16.2.11",
+    "@angular/material": "^16.2.10",
+    "@angular/platform-browser": "^16.2.11",
+    "@angular/platform-browser-dynamic": "^16.2.11",
+    "@angular/router": "^16.2.11",
+    "@ctrl/ngx-codemirror": "^6.1.0",
+    "@ng-select/ng-select": "^11.2.0",
+    "ngx-infinite-scroll": "^16.0.0",
+    "codemirror": "^5.65.16",
+    "rxjs": "~7.8.0",
+    "tslib": "^2.3.0",
+    "zone.js": "~0.13.0"
+  },
+  "devDependencies": {
+    "@angular-devkit/build-angular": "^16.2.9",
+    "@angular/cli": "~16.2.9",
+    "@angular/compiler-cli": "^16.2.11",
+    "husky": "^8.0.3",
+    "lint-staged": "^15.0.2",
+    "prettier": "3.0.3",
+    "typescript": "~5.0.2"
+  }
+}

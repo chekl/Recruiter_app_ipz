@@ -1,0 +1,12 @@
+<div *ngIf="control && control.hasError('required') && control.touched" class="validation-message">
+    Field can't be empty
+</div>
+<div *ngIf="control && control.hasError('time')" class="validation-message">
+    {{ errorMessage }}
+</div>
+<div *ngIf="control && control.hasError('min') " class="validation-message">
+    {{ errorMessage }}
+</div>
+<div *ngIf="control && control.hasError('maxTopics')" class="validation-message">
+    {{ errorMessage }}
+  </div>

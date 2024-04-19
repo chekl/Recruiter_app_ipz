@@ -1,0 +1,172 @@
+<div class="content">
+  <div class="modal__header">
+    <h2 class="modal__header-title">
+      Question {{ modal.data.currentQuestion }}/{{ modal.data.amountOfQuestions }}
+    </h2>
+    <button class="close-button" type="button" (click)="closeModal()" [disabled]="!form.valid && modal.data.isCandidate">
+      <img class="icon-close" src="assets/images/close.png" />
+    </button>
+  </div>
+
+  <!-- QUESTION -->
+  <mat-expansion-panel
+    class="container__content"
+    [expanded]="modal.data.isCandidate"
+    hideToggle
+    [disabled]="modal.data.isCandidate">
+    <mat-expansion-panel-header class="content__header">
+      <mat-panel-title class="content__headline">
+        {{ modal.data.question.title }}
+      </mat-panel-title>
+      <mat-panel-description>
+        {{ modal.data.question.time | timeFormat }}
+      </mat-panel-description>
+    </mat-expansion-panel-header>
+    <p class="content__text-question">{{ modal.data.question.description }}</p>
+    <div class="content__text">
+      <img
+        class="content__text-icon"
+        [src]="environment.backUrl + modal.data.question.type.link"
+        alt="question type icon" />
+      <span *ngFor="let topic of modal.data.question.topics" class="content__text-topic">{{
+        topic.name
+      }}</span>
+    </div>
+  </mat-expansion-panel>
+
+  <!-- ANSWER -->
+  <mat-expansion-panel class="container__content" [expanded]="true" hideToggle [disabled]="true">
+    <mat-expansion-panel-header class="content__header">
+      <mat-panel-title class="content__headline"> answer </mat-panel-title>
+      <mat-panel-description>
+        <div *ngIf="modal.data.isCandidate; else timeResult">
+          {{ elapsedTimeInMinutes | timeFormat }}
+        </div>
+        <ng-template #timeResult>
+          <div *ngIf="modal.data.question.answer.executionTime">
+            {{ modal.data.question.answer.executionTime | timeFormat }}
+          </div>
+        </ng-template>
+      </mat-panel-description>
+    </mat-expansion-panel-header>
+
+    <!-- CANDIDATE -->
+    <form [formGroup]="form" *ngIf="modal.data.isCandidate; else answerResult">
+      <div class="container__input">
+        <div class="input__header">
+          <label class="label" for="answer">Your answer</label>
+          <validation-message
+            header-content
+            [control]="form.get('answer')"
+            errorMessage="Answer must be less than 1000 characters.">
+          </validation-message>
+        </div>
+        <mat-form-field
+          main-content
+          class="textarea"
+          *ngIf="modal.data.question.type.name === 'text'">
+          <textarea
+            class="answer answer__input"
+            matInput
+            formControlName="answer"
+            name="answer"
+            placeholder="Type text"
+            id="answer"></textarea>
+        </mat-form-field>
+
+        <ngx-codemirror
+          *ngIf="modal.data.question.type.name === 'code'"
+          formControlName="answer"
+          class="answer__input"
+          name="answer"
+          [options]="{
+            lineNumbers: true,
+            theme: 'material',
+            mode: 'javascript'
+          }"></ngx-codemirror>
+      </div>
+    </form>
+
+    <!--  reviewer -->
+    <ng-template #answerResult>
+      <p class="content__text-answer" *ngIf="modal.data.question.type.name === 'text'">
+        {{ modal.data.question.answer.body }}
+      </p>
+      <ngx-codemirror
+        *ngIf="modal.data.question.type.name === 'code'"
+        [(ngModel)]="modal.data.question.answer.body"
+        [options]="{
+          lineNumbers: true,
+          theme: 'material',
+          mode: 'javascript',
+          readOnly: true
+        }"></ngx-codemirror>
+    </ng-template>
+  </mat-expansion-panel>
+
+  <!-- candidate panel -->
+  <div class="continue__section" *ngIf="modal.data.isCandidate; else markPanel">
+    <button
+      class="continue__btn"
+      mat-flat-button
+      color="primary"
+      *ngIf="!isLastQuestion; else finishQuestionary"
+      (click)="nextQuestion()"
+      [disabled]="!form.valid">
+      <div class="continue__content">
+        <div class="continue__text">next</div>
+        <mat-icon class="continue__icon">keyboard_arrow_right</mat-icon>
+      </div>
+    </button>
+    <ng-template #finishQuestionary>
+      <button
+        mat-flat-button
+        class="continue__btn"
+        color="primary"
+        (click)="closeModal()"
+        [disabled]="!form.valid">
+        <div class="continue__text">done</div>
+      </button>
+    </ng-template>
+  </div>
+
+  <!-- reviewer panel-->
+  <ng-template #markPanel>
+    <div class="mark__section">
+      <button mat-icon-button aria-label="go back"
+              (click)="handleTransitionButton(true)"
+              [class]="!modal.isReviewer && 'watch-mode'"
+      >
+        <mat-icon>keyboard_arrow_left</mat-icon>
+      </button>
+      <div class="mark__title" *ngIf="modal.isReviewer">Mark</div>
+      <div class="mark__estimation" *ngIf="modal.isReviewer">
+        <div class="mark__field">
+          <mat-button-toggle-group
+            (change)="onToggleChange($event)"
+            [disabled]="isSelectionDisabled"
+            [(ngModel)]="selectedItemIndex"
+          >
+            <mat-button-toggle
+              *ngFor="let item of items; let i = index"
+              [value]="i"
+              [class]="i <= selectedItemIndex ? 'marks__item highlighted' : 'marks__item'"
+              (click)="setMark(item)"
+            >
+              <div class="mark__wrapper">
+                {{ item }}
+              </div>
+            </mat-button-toggle>
+          </mat-button-toggle-group>
+        </div>
+        <div class="mark__tips">
+          <p>No answer</p>
+          <p>The answer is correct</p>
+        </div>
+      </div>
+      <button mat-icon-button aria-label="go on" (click)="handleTransitionButton(false)">
+        <mat-icon>keyboard_arrow_right</mat-icon>
+      </button>
+    </div>
+  </ng-template>
+</div>

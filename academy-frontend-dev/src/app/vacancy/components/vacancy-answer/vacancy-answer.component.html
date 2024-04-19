@@ -1,0 +1,51 @@
+<ng-container *ngIf="isLoading; else page">
+  <ta-loader></ta-loader>
+</ng-container>
+<ng-template #page>
+<div class="vacancy-answer">
+  <ta-vacancy-answer-details></ta-vacancy-answer-details>
+  <div class="table">
+    <h1 class="table__title mat-headline-5">Answers</h1>
+    <div class="table__container">
+      <table mat-table [dataSource]="application.questions" class="mat-table">
+        <ng-container matColumnDef="question">
+          <th mat-header-cell *matHeaderCellDef class="question-cell-width header-cell"> Question </th>
+          <td mat-cell *matCellDef="let element" class="question-cell-width"> {{element.title}} </td>
+        </ng-container>
+        <ng-container matColumnDef="status">
+          <th mat-header-cell *matHeaderCellDef class="header-cell cell-width"> Status </th>
+          <td mat-cell *matCellDef="let element" class="column-width">
+            <span class="mat-table__status"
+                  [ngClass]="{
+            'mat-table__status_answered':element.answer.status.toUpperCase() === AnswerStatuses.ANSWERED.toUpperCase(),
+            'mat-table__status_evaluated':element.answer.status.toUpperCase() === AnswerStatuses.EVALUATED.toUpperCase()
+            }"
+            >
+            {{element.answer.status}}
+            </span>
+          </td>
+        </ng-container>
+        <ng-container matColumnDef="mark">
+          <th mat-header-cell *matHeaderCellDef class="header-cell cell-width"> Mark </th>
+          <td mat-cell *matCellDef="let element" class="column-width"> {{element.answer.mark || "--"}} </td>
+        </ng-container>
+        <ng-container matColumnDef="icon">
+          <th mat-header-cell *matHeaderCellDef class="header-cell icon-cell-width"></th>
+          <td mat-cell *matCellDef="let element" class="column-width"><img src="assets/icons/right-arr.svg" alt="icon" class="icon"></td>
+        </ng-container>
+        <tr class="mat-row" *matNoDataRow>
+          <td class="mat-cell no-data" colspan="3">No answers found</td>
+        </tr>
+        <tr mat-header-row
+            *matHeaderRowDef="displayedColumns"
+            [ngClass]="{'no-border': application.questions.length}"
+            class="mat-mdc-header-row"
+        >
+        </tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;" class="mat-common-row" (click)="openModalDetailsAnswer(row)"></tr>
+      </table>
+    </div>
+  </div>
+</div>
+</ng-template>
+

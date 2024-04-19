@@ -1,0 +1,9 @@
+export * as VacanciesController from './vacancies.controller';
+export * as QuestionsController from './questions.controller';
+export * as TopicsController from './topics.controller';
+export * as QuestionTypesController from './question-types.controller';
+export * as AuthController from './auth.controller';
+export * as UsersController from './user.controller';
+export * as VacancyTypesController from './vacancy-types.controller';
+export * as CandidateController from './candidate.controller';
+export * as ApplicationController from './applications.controller';

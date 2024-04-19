@@ -1,0 +1,24 @@
+@import 'src/styles/variables.scss';
+@import 'src/styles/layout-pages.scss';
+
+.container__hero {
+  img {
+    width: 396px;
+    height: 196px;
+    margin: 62px 0 85px;
+  }
+}
+
+.mat-headline-1 {
+  text-align: center;
+  width: 396px;
+}
+
+.mat-headline-2 {
+  margin: 0;
+}
+
+.mat-headline-1,
+.mat-headline-2 {
+  color: $black;
+}

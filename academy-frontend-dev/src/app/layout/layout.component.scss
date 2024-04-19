@@ -1,0 +1,29 @@
+@import 'src/styles/variables.scss';
+
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100vw;
+  height: 100vh;
+  overflow: auto;
+
+  main {
+    padding-bottom: 50px;
+    overflow: initial;
+  }
+}
+
+.container {
+  max-width: 1140px;
+  flex: 1;
+  width: 100%;
+}
+
+.gray-bg {
+  background: $light-gray;
+}
+
+.white-bg {
+  background-color: #fdfdfd;
+}

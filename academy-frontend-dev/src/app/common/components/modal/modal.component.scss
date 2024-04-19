@@ -1,0 +1,58 @@
+@use '@angular/material' as mat;
+@import 'src/styles/variables.scss';
+@import 'src/styles/typography.scss';
+@import 'src/styles/material.scss';
+
+.modal {
+  max-height: 97vh;
+  padding-bottom: 1.25rem;
+  overflow-x: hidden;
+
+  &__md {
+    width: 496px;
+  }
+
+  &__lg {
+    width: 756px;
+  }
+
+  &__header {
+    padding: 2.5rem 2.5rem 1.75rem;
+    background-color: $light-gray;
+    border-bottom: 1px solid #eee;
+    display: flex;
+    justify-content: space-between;
+    position: relative;
+    width: 100%;
+    &-title {
+      font-family: $raleway-font-family;
+      font-size: 24px;
+      font-weight: 800;
+      line-height: normal;
+      margin: 0;
+    }
+  }
+  &__body {
+    padding: 1.5rem 2.75rem;
+    font-size: 14px;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+}
+
+.close-button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  position: absolute;
+  top: 0;
+  right: 0;
+  margin-top: 1.25rem;
+  margin-right: 1rem;
+  user-select: none;
+}
+
+.close-button:focus {
+  outline: none;
+}

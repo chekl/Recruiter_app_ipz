@@ -1,0 +1,75 @@
+<ta-modal title="Invite Candidate">
+  <div>
+    <p class="modal-note">{{ modalNote }}</p>
+    <form #form="ngForm" (ngSubmit)="onSubmit(form)" class="modal-form">
+      <div class="modal-form__field">
+        <div class="modal-form__notes">
+          <label class="modal-form__label" for="candidate-email">Email</label>
+          <ng-container *ngIf="(emailCtrl.invalid && (emailCtrl.dirty || emailCtrl.touched))">
+            <span *ngIf="!emailCtrl.value" class="modal-form__error-msg">
+              Field can't be empty
+            </span>
+            <span *ngIf="emailCtrl.value && emailCtrl.hasError('pattern')" class="modal-form__error-msg">
+              Email is invalid
+            </span>
+          </ng-container>
+        </div>
+        <input matInput [matAutocomplete]="auto" [formControl]="emailCtrl" class="modal-form__input" type="email"
+          name="candidate-email" id="candidate-email" placeholder="Type email" required />
+        <mat-autocomplete #auto="matAutocomplete" (optionSelected)="onOptionSelected()">
+          <ng-container *ngIf="candidate">
+            <mat-option [value]="candidate.email">
+              <div class="option-icon">
+                <img src="assets/icons/InviteCandidateIcon.svg" alt="icon" />
+              </div>
+              <div class="option-value">{{ candidate.firstName }} {{ candidate.lastName }}</div>
+            </mat-option>
+          </ng-container>
+        </mat-autocomplete>
+      </div>
+      <div class="modal-form__field">
+        <div class="modal-form__notes">
+          <label class="modal-form__label" for="candidate-firstname">First name</label>
+          <ng-container *ngIf="(firstName.invalid && (firstName.dirty || firstName.touched))">
+            <span *ngIf="!candidateModel.firstName" class="modal-form__error-msg">
+              Field can't be empty
+            </span>
+            <span *ngIf="candidateModel.firstName && candidateModel.firstName.length < 2" class="modal-form__error-msg">
+              Type at least 2 letters
+            </span>
+          </ng-container>
+        </div>
+        <input class="modal-form__input" type="text" name="candidate-firstname" id="candidate-firstname"
+          placeholder="Type first name" minlength="2" maxlength="20" [disabled]="!!candidate"
+          [(ngModel)]="candidateModel.firstName" [ngClass]="{autofilled: isSelected}" (ngModelChange)="isSelected = false"
+          required #firstName='ngModel' />
+      </div>
+      <div class="modal-form__field">
+        <div class="modal-form__notes">
+          <label class="modal-form__label" for="candidate-lastname">Last name</label>
+  
+          <ng-container *ngIf="(lastName.invalid && (lastName.dirty || lastName.touched))">
+            <span *ngIf="!candidateModel.lastName" class="modal-form__error-msg">
+              Field can't be empty
+            </span>
+            <span *ngIf="candidateModel.lastName && candidateModel.lastName.length < 2" class="modal-form__error-msg">
+              Type at least 2 letters
+            </span>
+          </ng-container>
+        </div>
+        <input class="modal-form__input" type="text" name="candidate-lastname" id="candidate-lastname"
+          placeholder="Type last name" minlength="2" maxlength="20" [disabled]="!!candidate"
+          [(ngModel)]="candidateModel.lastName" [ngClass]="{autofilled: isSelected}" (ngModelChange)="isSelected = false"
+          required #lastName='ngModel' />
+      </div>
+      <button [disabled]="!isFormValid" type="submit" mat-flat-button color="primary" class="btn-invite">
+        <ng-container *ngIf="loading; else invite">
+          <ta-loader [diameter]="30" color="White"></ta-loader>
+        </ng-container>
+        <ng-template #invite>
+          Invite
+        </ng-template>
+      </button>
+    </form>
+  </div>
+</ta-modal>
